@@ -1,0 +1,125 @@
+input[class~='inputGlow'] {
+    background: -webkit-linear-gradient(#333, #222);
+    background: -moz-linear-gradient(#333, #222);
+    background: -o-linear-gradient(#333, #222);
+    background: -ms-linear-gradient(#333, #222);
+    background: linear-gradient(#333, #222);
+    border: 1px solid #444;
+    border-radius: 5px 0 0 5px;
+    box-shadow: 0 2px 0 #000;
+    color: #888;
+    display: block;
+    float: left;
+    font-family: 'Cabin', helvetica, arial, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 10px;
+    text-shadow: 0 -1px 0 #000;
+    width: 200px;
+}
+
+input[class~='inputGlow']::-webkit-input-placeholder {
+    color: #888;
+}
+
+input[class~='inputGlow']:-moz-placeholder {
+    color: #888;
+}
+
+input[class~='inputGlow']:focus {
+    -webkit-animation: inputGlow 800ms ease-out infinite alternate;
+    -moz-animation: inputGlow 800ms ease-out infinite alternate;
+    -o-animation: inputGlow 800ms ease-out infinite alternate;
+    -ms-animation: inputGlow 800ms ease-out infinite alternate;
+    animation: inputGlow 800ms ease-out infinite alternate;
+    background: #222922;
+    background: -webkit-linear-gradient(#333933, #222922);
+    background: -moz-linear-gradient(#333933, #222922);
+    background: -o-linear-gradient(#333933, #222922);
+    background: -ms-linear-gradient(#333933, #222922);
+    background: linear-gradient(#333933, #222922);
+    border-color: #4F3DF0;
+    box-shadow: 0 0 5px rgba(11, 22, 236, 0.3), inset 0 0 5px rgba(11, 22, 236, .2), 0 2px 0 #000;
+    color: #efe;
+    outline: none;
+}
+
+input[class~='inputGlow']:focus::-webkit-input-placeholder {
+    color: #efe;
+}
+
+input[class~='inputGlow']:focus:-moz-placeholder {
+    color: #efe;
+}
+
+@-webkit-keyframes inputGlow {
+    0% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 5px rgba(11, 22, 236, 0.3), inset 0 0 5px rgba(11, 22, 236, .2), 0 2px 0 #000;
+    }
+    100% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 20px rgba(11, 22, 236, .6), inset 0 0 10px rgba(11, 22, 236, .4), 0 2px 0 #000;
+    }
+}
+
+@-moz-keyframes inputGlow {
+    0% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 5px rgba(11, 22, 236, 0.3), inset 0 0 5px rgba(11, 22, 236, .2), 0 2px 0 #000;
+    }
+    100% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 20px rgba(11, 22, 236, .6), inset 0 0 10px rgba(11, 22, 236, .4), 0 2px 0 #000;
+    }
+}
+
+@-o-keyframes inputGlow {
+    0% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 5px rgba(11, 22, 236, 0.3), inset 0 0 5px rgba(11, 22, 236, .2), 0 2px 0 #000;
+    }
+    100% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 20px rgba(11, 22, 236, .6), inset 0 0 10px rgba(11, 22, 236, .4), 0 2px 0 #000;
+    }
+}
+
+@-ms-keyframes inputGlow {
+    0% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 5px rgba(11, 22, 236, 0.3), inset 0 0 5px rgba(11, 22, 236, .2), 0 2px 0 #000;
+    }
+    100% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 20px rgba(11, 22, 236, .6), inset 0 0 10px rgba(11, 22, 236, .4), 0 2px 0 #000;
+    }
+}
+
+@keyframes inputGlow {
+    0% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 5px rgba(11, 22, 236, 0.1), inset 0 0 5px rgba(11, 22, 236, .1), 0 2px 0 #000;
+    }
+    100% {
+        border-color: #4F3DF0;
+        box-shadow: 0 0 20px rgba(11, 22, 236, .9), inset 0 0 10px rgba(11, 22, 236, .8), 0 2px 0 #000;
+    }
+}
+
+
+/* 绿色
+
+0% {
+		border-color: #393;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #6f6;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+
+*/

@@ -1,0 +1,4 @@
+
+使用效果参考 https://daneden.github.io/animate.css/
+
+使用方法示例：<h1 class="animated infinite bounce">Example</h1>
