@@ -39,27 +39,23 @@
         }
         
         .back {
-            transform: translateZ(-100px) rotateY(180deg);
+            transform: rotateY(180deg) translateZ(100px);
         }
         
         .right {
-            transform: rotateY(-270deg) translateX(100px);
-            transform-origin: top right;
+            transform: rotateY(-90deg) translateZ(100px);
         }
         
         .left {
-            transform: rotateY(270deg) translateX(-100px);
-            transform-origin: center left;
+            transform: rotateY(90deg) translateZ(100px);
         }
         
         .top {
-            transform: rotateX(-270deg) translateY(-100px);
-            transform-origin: top center;
+            transform: rotateX(-90deg) translateZ(100px);
         }
         
         .bottom {
-            transform: rotateX(270deg) translateY(100px);
-            transform-origin: bottom center;
+            transform: rotateX(90deg) translateZ(100px);
         }
         /* inner cube */
         
@@ -69,7 +65,7 @@
             left: 50px;
             width: 100px;
             height: 100px;
-            transition: all 1s linear;
+            transition: all 0.2s ease-in 0.5s;
         }
         
         .inner1 {
@@ -77,27 +73,23 @@
         }
         
         .inner2 {
-            transform: translateZ(-50px) rotateY(180deg);
+            transform: rotateY(180deg) translateZ(50px);
         }
         
         .inner3 {
-            transform: rotateX(-90deg) translateY(50px);
-            transform-origin: left bottom;
+            transform: rotateY(-90deg) translateZ(50px);
         }
         
         .inner4 {
-            transform: rotateY(270deg) translateX(-50px);
-            transform-origin: center left;
+            transform: rotateY(90deg) translateZ(50px);
         }
         
         .inner5 {
-            transform: rotateY(-270deg) translateX(50px);
-            transform-origin: top right;
+            transform: rotateX(-90deg) translateZ(50px);
         }
         
         .inner6 {
-            transform: rotateX(-270deg) translateY(-50px);
-            transform-origin: left top;
+            transform: rotateX(90deg) translateZ(50px);
         }
         
         @keyframes rotate {
@@ -125,23 +117,47 @@
         }
         
         .wrap:hover .back {
-            transform: translateZ(-200px) rotateY(180deg);
+            transform: rotateY(180deg) translateZ(200px);
         }
         
         .wrap:hover .right {
-            transform: rotateY(-270deg) translateZ(100px) translateX(100px);
+            transform: rotateY(-90deg) translateZ(200px);
         }
         
         .wrap:hover .left {
-            transform: rotateY(270deg) translateZ(100px) translateX(-100px);
+            transform: rotateY(90deg) translateZ(200px);
         }
         
         .wrap:hover .top {
-            transform: rotateX(-270deg) translateZ(100px) translateY(-100px);
+            transform: rotateX(-90deg) translateZ(200px);
         }
         
         .wrap:hover .bottom {
-            transform: rotateX(270deg) translateZ(100px) translateY(100px);
+            transform: rotateX(90deg) translateZ(200px);
+        }
+        
+        .wrap:hover .inner1 {
+            transform: translateZ(100px);
+        }
+        
+        .wrap:hover .inner2 {
+            transform: rotateY(180deg) translateZ(100px);
+        }
+        
+        .wrap:hover .inner3 {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        
+        .wrap:hover .inner4 {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        
+        .wrap:hover .inner5 {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+        
+        .wrap:hover .inner6 {
+            transform: rotateX(90deg) translateZ(100px);
         }
     </style>
 </head>
