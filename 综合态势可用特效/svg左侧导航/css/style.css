@@ -9,12 +9,16 @@
 		
 		#menu {
 		    height: 100%;
-		    position: fixed;
-		    background-color: #FED057;
+		    position: fixed;		    
 		    width: 300px;
 		    transition: 1000ms all cubic-bezier(0.19, 1, 0.22, 1);
 		    transform: translateX(-100%);
-		    left: 60px;
+			left: 60px;			
+
+			background-color: rgba(73, 160, 154, 0.3);
+			box-shadow: 0 0 20px rgba(231, 254, 237, 0.7);
+			color: rgba(255, 255, 255, 0.8);
+			box-sizing: border-box;
 		}
 		
 		#menu.expanded {
