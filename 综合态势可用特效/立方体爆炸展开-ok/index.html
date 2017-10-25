@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纯CSS3炫酷3D旋转立方体爆炸展开动画特效</title>
+    <link rel="stylesheet" href="css/transparentContainer.css">
+    <script src="js/prefixfree.min.js" type="text/javascript"></script>
+    <!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+
+
+    <style>
+        body {
+            background-color: black;
+        }
+        
+        .cube {
+            margin: auto;
+            position: relative;
+            height: 200px;
+            width: 200px;
+            transform-style: preserve-3d;
+        }
+        
+        .outter {
+            position: absolute;
+            box-sizing: border-box;
+            height: 100%;
+            width: 100%;
+            transition: transform 0.2s ease-in;
+        }
+        
+        .front {
+            transform: translateZ(100px);
+        }
+        
+        .back {
+            transform: rotateY(180deg) translateZ(100px);
+        }
+        
+        .right {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        
+        .left {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        
+        .top {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+        
+        .bottom {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+        /* inner cube */
+        
+        .inner {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            transition: all 0.2s ease-in 0.5s;
+        }
+        
+        .inner1 {
+            transform: translateZ(50px);
+        }
+        
+        .inner2 {
+            transform: rotateY(180deg) translateZ(50px);
+        }
+        
+        .inner3 {
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+        
+        .inner4 {
+            transform: rotateY(90deg) translateZ(50px);
+        }
+        
+        .inner5 {
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+        
+        .inner6 {
+            transform: rotateX(90deg) translateZ(50px);
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        
+        .cube {
+            animation: rotate 20s infinite linear;
+        }
+        
+        .wrap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .wrap:hover .front {
+            transform: translateZ(200px);
+        }
+        
+        .wrap:hover .back {
+            transform: rotateY(180deg) translateZ(200px);
+        }
+        
+        .wrap:hover .right {
+            transform: rotateY(-90deg) translateZ(200px);
+        }
+        
+        .wrap:hover .left {
+            transform: rotateY(90deg) translateZ(200px);
+        }
+        
+        .wrap:hover .top {
+            transform: rotateX(-90deg) translateZ(200px);
+        }
+        
+        .wrap:hover .bottom {
+            transform: rotateX(90deg) translateZ(200px);
+        }
+        
+        .wrap:hover .inner1 {
+            transform: translateZ(100px);
+        }
+        
+        .wrap:hover .inner2 {
+            transform: rotateY(180deg) translateZ(100px);
+        }
+        
+        .wrap:hover .inner3 {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        
+        .wrap:hover .inner4 {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        
+        .wrap:hover .inner5 {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+        
+        .wrap:hover .inner6 {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="wrap">
+        <div class="cube">
+            <div class="outter front transparentContainer">
+                <h2>实时接报</h2>
+            </div>
+            <div class="outter back transparentContainer">
+                <h2>气象信息</h2>
+            </div>
+            <div class="outter top transparentContainer">
+                <h2>交通路况</h2>
+            </div>
+            <div class="outter bottom transparentContainer">
+                <h2>警力资源</h2>
+            </div>
+            <div class="outter left transparentContainer">
+                <h2>警情统计</h2>
+            </div>
+            <div class="outter right transparentContainer">
+                <h2>统一通信</h2>
+            </div>
+
+            <div class="inner inner1 transparentContainer_opacity7">综合态势</div>
+            <div class="inner inner2 transparentContainer_opacity7">综合态势</div>
+            <div class="inner inner3 transparentContainer_opacity7">综合态势</div>
+            <div class="inner inner4 transparentContainer_opacity7">综合态势</div>
+            <div class="inner inner5 transparentContainer_opacity7">综合态势</div>
+            <div class="inner inner6 transparentContainer_opacity7">综合态势</div>
+
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>

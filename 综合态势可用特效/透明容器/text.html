@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>透明容器</title>
+    <script src="TransparentContainer.js"></script>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background-color: black;
+        }
+        
+        body {
+            width: 1280px;
+            height: 100%;
+            margin: auto;
+            padding: 0;
+            background-color: black;
+        }
+        
+        .transparentContainer {
+            width: 420px;
+            height: 460px;
+            background-color: rgba(73, 160, 154, 0.3);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px rgba(231, 254, 237, 0.7);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            box-sizing: border-box;
+            text-align: center;
+            backface-visibility: visible;
+        }
+        
+        .transparentContainer::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 10%;
+            height: 10%;
+            border-top: 3px solid rgba(238, 249, 241, 0.5);
+            border-left: 3px solid rgba(238, 249, 241, 0.5);
+            top: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .transparentContainer::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 10%;
+            height: 10%;
+            border-right: 3px solid rgba(238, 249, 241, 0.5);
+            border-bottom: 3px solid rgba(238, 249, 241, 0.5);
+            right: 0;
+            bottom: 0;
+            border-radius: 2px;
+        }
+        
+        a {
+            text-decoration: none;
+            display: inline-block;
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            background-color: palevioletred;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="transparentContainer"></div>
+    <a href="javascript:void(0)" onclick="addDom();">增加div</a>
+    <a href="javascript:void(0)" onclick="removeCla();">移除class</a>
+
+    <script>
+        function addDom() {
+            var d1 = new TransparentContainer(240, 440);
+
+            var bd = document.getElementsByTagName('body')[0];
+
+            bd.appendChild(d1);
+            var txt = document.createElement('span');
+            txt.innerText = '综合态势展示';
+            d1.append(txt);
+        }
+
+        function removeCla() {
+            var bd = document.getElementsByClassName('transparentContainer')[0];
+            bd.removeClassName('transparentContainer');
+        }
+    </script>
+
+
+</body>
+
+</html>
