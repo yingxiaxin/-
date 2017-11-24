@@ -2,7 +2,8 @@
 /*****
  * 检查是否存在Jquery
  *****/
-if(!($ || jQuery)){
+if(!($ || jQuery))
+{
     throw "jQuery没有引入"
 }
 
@@ -11,108 +12,138 @@ if(!($ || jQuery)){
  * @param dom jquery dom对象，例如，$('#id')所选中的对象
  * @returns {*} 返回包装后的对象
  */
-function initElement(dom){
-    if(dom.matrix3){ //元素已经初始化过
+function initElement(dom)
+{
+    if(dom.matrix3)
+    { 
+        //元素已经初始化过
         return;
     }
     /*
     根据情况，初始化矩阵，用3维矩阵表示元素的2D变换，用4维矩阵表示元素的3D变换
      */
     var transformMatrix = getDOMElementTransformMatrix(dom);
-    if(transformMatrix.length >0 ){
-        if(transformMatrix.length>9){
+    if(transformMatrix.length >0 )
+    {
+        if(transformMatrix.length>9)
+        {
             dom.matrix4 = new Matrix4(transformMatrix);
             dom.matrix3 = new Matrix3();
-        } else{
+        }
+        else
+        {
             dom.matrix4 = new Matrix4();
             dom.matrix3 = new Matrix3(transformMatrix);
         }
-    }else{
+    }
+    else
+    {
         dom.matrix3 = new Matrix3();
         dom.matrix4 = new Matrix4();
     }
     return dom;
 }
 
-$.fn.translate = function(x,y){
+$.fn.translate = function(x,y)
+{
     initElement(this);
     this.matrix3.translate(x,y);
     var option = this.matrix3.toTransformOption();
     setTransform(this,option)
 }
 
-$.fn.rotate = function(angle){
+$.fn.rotate = function(angle)
+{
     initElement(this);
     this.matrix3.rotate(angle);
     var option = this.matrix3.toTransformOption();
     setTransform(this,option)
 }
-$.fn.scale = function(x,y){
+
+$.fn.scale = function(x,y)
+{
     initElement(this);
     this.matrix3.scale(x,y);
     var option = this.matrix3.toTransformOption();
     setTransform(this,option)
 }
-$.fn.skew = function(xAngle,yAngle){
+
+$.fn.skew = function(xAngle,yAngle)
+{
     initElement(this);
     this.matrix3.skew(xAngle,yAngle);
     var option = this.matrix3.toTransformOption();
     setTransform(this,option)
 }
 
-$.fn.translate3d = function(x,y,z){
+$.fn.translate3d = function(x,y,z)
+{
     initElement(this);
-    this.matrix4.translate(x,y,z);
+    this.matrix4.translate3d(x,y,z);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
-$.fn.translateX = function(x){
+
+$.fn.translateX = function(x)
+{
     initElement(this);
     this.matrix4.translateX(x);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
-$.fn.translateY = function(y){
+
+$.fn.translateY = function(y)
+{
     initElement(this);
     this.matrix4.translateY(y);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
-$.fn.translateZ = function(z){
+
+$.fn.translateZ = function(z)
+{
     initElement(this);
     this.matrix4.translateZ(z);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
 
-$.fn.scale3d = function(x,y,z){
+$.fn.scale3d = function(x,y,z)
+{
     initElement(this);
     this.matrix4.scale3d(x,y,z);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
-$.fn.scaleX = function(x){
+
+$.fn.scaleX = function(x)
+{
     initElement(this);
     this.matrix4.scaleX(x);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
-$.fn.scaleY = function(y){
+
+$.fn.scaleY = function(y)
+{
     initElement(this);
     this.matrix4.scaleY(y);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
-$.fn.scaleZ = function(z){
+
+$.fn.scaleZ = function(z)
+{
     initElement(this);
     this.matrix4.scaleZ(z);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
 
-$.fn.rotate = function(x,y,z,angle){
+$.fn.rotate3d = function(x,y,z,angle)
+{
     initElement(this);
-    this.matrix4.rotate(new Vector3(x,y,z),angle);
+    this.matrix4.rotate3d(new Vector3(x,y,z),angle);
     var option = this.matrix4.toTransformOption();
     setTransform(this,option)
 }
@@ -126,7 +157,8 @@ $.fn.rotate = function(x,y,z,angle){
  * @param matrix 矩阵
  * @constructor
  */
-var Matrix3 = function(matrix){
+var Matrix3 = function(matrix)
+{
     this.matrix = matrix?matrix:
            [1,0,0,
             0,1,0,
@@ -149,15 +181,18 @@ var Matrix3 = function(matrix){
  * @param item
  * @returns {Matrix3}
  */
-Matrix3.prototype.multiply = function(item){
+Matrix3.prototype.multiply = function(item)
+{
     var matrix = this.matrix;
     var itemMatrix = item.matrix;
     var resultMatrix = [];
-    for(var i = 0 ; i < matrix.length ;i++){
-        var row = Number.parseInt(i/3);
+    for(var i = 0 ; i < matrix.length; i++)
+    {
+        var row = Number.parseInt(i/3); //parseInt不是四舍五入，而是取小数点前面的数
         var col = Number.parseInt(i%3);
         var sum = 0;
-        for(var j = 0 ; j< 3 ; j++){
+        for(var j = 0 ; j< 3 ; j++)
+        {
             sum += matrix[row*3+j]*itemMatrix[j*3+col];
         }
         resultMatrix[i] = sum;
@@ -172,8 +207,9 @@ Matrix3.prototype.multiply = function(item){
  * @param angle
  * @returns {Matrix3}
  */
-Matrix3.prototype.rotate = function(angle){
-    var angleInc = angle - this.rotateAngle;   //计算差值
+Matrix3.prototype.rotate = function(angle)
+{
+    var angleInc = angle;   //计算差值
     var rad = angleInc/180*Math.PI;
     var transformMatrix = new Matrix3([
         Math.cos(rad),-Math.sin(rad),0,
@@ -181,7 +217,7 @@ Matrix3.prototype.rotate = function(angle){
         0,0,1
     ]);
     this.multiply(transformMatrix);
-    this.rotateAngle = angle;
+    this.rotateAngle += angle;
     return this;
 }
 
@@ -191,17 +227,18 @@ Matrix3.prototype.rotate = function(angle){
  * @param y
  * @returns {Matrix3}
  */
-Matrix3.prototype.translate = function(x,y){
-    var xInc = x - this.translateX;//计算差值
-    var yInc = y - this.translateY;
+Matrix3.prototype.translate = function(x,y)
+{
+    var xInc = x;//计算差值
+    var yInc = y;
     var transformMatrix = new Matrix3([
         1,0,xInc,
         0,1,yInc,
         0,0,1
     ]);
     this.multiply(transformMatrix);
-    this.translateX = x;
-    this.translateY = y;
+    this.translateX += x;
+    this.translateY += y;
     return this;
 }
 
@@ -211,17 +248,18 @@ Matrix3.prototype.translate = function(x,y){
  * @param y
  * @returns {Matrix3}
  */
-Matrix3.prototype.scale = function(x,y){
-    var xInc = x/this.scaleX;
-    var yInc = y/this.scaleY;
+Matrix3.prototype.scale = function(x,y)
+{
+    var xInc = x;
+    var yInc = y;
     var transformMatrix = new Matrix3([
         xInc,0,0,
         0,yInc,0,
         0,0,1
     ]);
     this.multiply(transformMatrix);
-    this.scaleX = x;
-    this.scaleY = y;
+    this.scaleX *= x;
+    this.scaleY *= y;
     return this;
 }
 /**
@@ -230,9 +268,10 @@ Matrix3.prototype.scale = function(x,y){
  * @param yAngle
  * @returns {Matrix3}
  */
-Matrix3.prototype.skew = function(xAngle,yAngle){
-    var xInc = xAngle - this.skewX;
-    var yInc = yAngle - this.skewY;
+Matrix3.prototype.skew = function(xAngle,yAngle)
+{
+    var xInc = xAngle;
+    var yInc = yAngle;
     var xRad = xInc/180*Math.PI;
     var yRad = yInc/180*Math.PI;
     var transformMatrix = new Matrix3([
@@ -241,8 +280,8 @@ Matrix3.prototype.skew = function(xAngle,yAngle){
         0,0,1
     ]);
     this.multiply(transformMatrix);
-    this.skewX = xAngle;
-    this.skewY = yAngle;
+    this.skewX += xAngle;
+    this.skewY += yAngle;
     return this;
 }
 
@@ -250,13 +289,15 @@ Matrix3.prototype.skew = function(xAngle,yAngle){
  * 将矩阵转化成transform字符串
  * @returns {string}
  */
-Matrix3.prototype.toTransformString = function(){
+Matrix3.prototype.toTransformString = function()
+{
     var matrix = this.matrix;
     var str = "matrix("+matrix[0]+","+matrix[3]+", "+matrix[1]+","+matrix[4]+", "+matrix[2]+","+matrix[5]+")"
     return str;
 }
 
-Matrix3.prototype.toTransformOption = function(){
+Matrix3.prototype.toTransformOption = function()
+{
     var that = this;
     return {
         matrix:that.toTransformString()
@@ -268,7 +309,8 @@ Matrix3.prototype.toTransformOption = function(){
  * @param matrix 矩阵
  * @constructor
  */
-var Matrix4 = function(matrix){
+var Matrix4 = function(matrix)
+{
     this.matrix = matrix?matrix:
         [1,0,0,0,
          0,1,0,0,
@@ -299,10 +341,11 @@ var Matrix4 = function(matrix){
  * @param z
  * @returns {Matrix4}
  */
-Matrix4.prototype.translate = function(x,y,z){
-    var xInc = x - this._translateX;//计算差值
-    var yInc = y - this._translateY;
-    var zInc = z - this._translateZ;
+Matrix4.prototype.translate3d = function(x,y,z)
+{
+    var xInc = x;//计算差值
+    var yInc = y;
+    var zInc = z;
     var transformMatrix = new Matrix4([
         1,0,0,xInc,
         0,1,0,yInc,
@@ -310,9 +353,9 @@ Matrix4.prototype.translate = function(x,y,z){
         0,0,0,1
     ]);
     this.multiply(transformMatrix);
-    this._translateX = x;
-    this._translateY = y;
-    this._translateZ = z;
+    this._translateX += x;
+    this._translateY += y;
+    this._translateZ += z;
     return this;
 }
 
@@ -321,8 +364,9 @@ Matrix4.prototype.translate = function(x,y,z){
  * @param x
  * @returns {Matrix4}
  */
-Matrix4.prototype.translateX = function(x){
-    return this.translate(x,this._translateY,this._translateZ);
+Matrix4.prototype.translateX = function(x)
+{
+    return this.translate3d(x,0,0);
 }
 
 /**
@@ -330,16 +374,18 @@ Matrix4.prototype.translateX = function(x){
  * @param y
  * @returns {Matrix4}
  */
-Matrix4.prototype.translateY = function(y){
-    return this.translate(this._translateX,y,this._translateZ);
+Matrix4.prototype.translateY = function(y)
+{
+    return this.translate3d(0,y,0);
 }
 /**
  * 沿z轴移动
  * @param z
  * @returns {Matrix4}
  */
-Matrix4.prototype.translateZ = function(z){
-    return this.translate(this._translateX,this._translateY,z);
+Matrix4.prototype.translateZ = function(z)
+{
+    return this.translate3d(0,0,z);
 }
 
 
@@ -350,10 +396,11 @@ Matrix4.prototype.translateZ = function(z){
  * @param z z方向
  * @returns {Matrix4}
  */
-Matrix4.prototype.scale = function(x,y,z){
-    var xInc = x/this._scaleX;
-    var yInc = y/this._scaleY;
-    var zInc = z/this._scaleZ;
+Matrix4.prototype.scale3d = function(x,y,z)
+{
+    var xInc = x;
+    var yInc = y;
+    var zInc = z;
     var transformMatrix = new Matrix4([
         xInc,0,0,0,
         0,yInc,0,0,
@@ -361,9 +408,9 @@ Matrix4.prototype.scale = function(x,y,z){
         0,0,0,1
     ]);
     this.multiply(transformMatrix);
-    this._scaleX = x;
-    this._scaleY = y;
-    this._scaleZ = z;
+    this._scaleX *= x;
+    this._scaleY *= y;
+    this._scaleZ *= z;
     return this;
 }
 
@@ -372,16 +419,18 @@ Matrix4.prototype.scale = function(x,y,z){
  * @param x
  * @returns {Matrix4}
  */
-Matrix4.prototype.scaleX = function(x){
-    return this.scale(x,this._scaleY,this._scaleZ);
+Matrix4.prototype.scaleX = function(x)
+{
+    return this.scale3d(x, 1, 1);
 }
 /**
  * 沿y轴缩放
  * @param y
  * @returns {Matrix4}
  */
-Matrix4.prototype.scaleY = function(y){
-    return this.scale(this._scaleX,y ,this._scaleZ);
+Matrix4.prototype.scaleY = function(y)
+{
+    return this.scale3d(1, y, 1);
 }
 
 /**
@@ -389,8 +438,9 @@ Matrix4.prototype.scaleY = function(y){
  * @param zx
  * @returns {Matrix4}
  */
-Matrix4.prototype.scaleZ = function(z){
-    return this.scale(this._scaleX,this._scaleY,z);
+Matrix4.prototype.scaleZ = function(z)
+{
+    return this.scale3d(1, 1, z);
 }
 
 /**
@@ -399,7 +449,8 @@ Matrix4.prototype.scaleZ = function(z){
  * @param angle 角度
  * @returns {Matrix4}
  */
-Matrix4.prototype.rotate = function(axis,angle){
+Matrix4.prototype.rotate3d = function(axis,angle)
+{
     axis.normalize();
     var sin = Math.sin;
     var cos = Math.cos;
@@ -417,7 +468,7 @@ Matrix4.prototype.rotate = function(axis,angle){
         0                        ,  0                             ,    0                      ,    1];
     var transfromMatrix = new Matrix4(R);
     this.multiply(transfromMatrix);
-    this.translate(this._translateX,this._translateY,this._translateZ);
+    //this.translate3d(this._translateX,this._translateY,this._translateZ);
     return this;
 }
 
@@ -426,8 +477,9 @@ Matrix4.prototype.rotate = function(axis,angle){
  * @param angle
  * @returns {Matrix4}
  */
-Matrix4.prototype.rotateX = function(angle){
-    return this.rotate(new Vector3(1,0,0),angle);
+Matrix4.prototype.rotateX = function(angle)
+{
+    return this.rotate3d(new Vector3(1,0,0),angle);
 }
 
 /**
@@ -435,8 +487,9 @@ Matrix4.prototype.rotateX = function(angle){
  * @param angle
  * @returns {Matrix4}
  */
-Matrix4.prototype.rotateY = function(angle){
-    return this.rotate(new Vector3(0,1,0),angle);
+Matrix4.prototype.rotateY = function(angle)
+{
+    return this.rotate3d(new Vector3(0,1,0),angle);
 }
 
 /**
@@ -444,8 +497,9 @@ Matrix4.prototype.rotateY = function(angle){
  * @param angle
  * @returns {Matrix4}
  */
-Matrix4.prototype.rotateZ = function(angle){
-    return this.rotate(new Vector3(0,0,1),angle);
+Matrix4.prototype.rotateZ = function(angle)
+{
+    return this.rotate3d(new Vector3(0,0,1),angle);
 }
 
 
@@ -454,15 +508,18 @@ Matrix4.prototype.rotateZ = function(angle){
  * @param item
  * @returns {Matrix3}
  */
-Matrix4.prototype.multiply = function(item){
+Matrix4.prototype.multiply = function(item)
+{
     var matrix = this.matrix;
     var itemMatrix = item.matrix;
     var resultMatrix = [];
-    for(var i = 0 ; i < matrix.length ;i++){
+    for(var i = 0 ; i < matrix.length ;i++)
+    {
         var row = Number.parseInt(i/4);
         var col = Number.parseInt(i%4);
         var sum = 0;
-        for(var j = 0 ; j< 4 ; j++){
+        for(var j = 0 ; j< 4 ; j++)
+        {
             sum += matrix[row*4+j]*itemMatrix[j*4+col];
         }
         resultMatrix[i] = sum;
@@ -476,7 +533,8 @@ Matrix4.prototype.multiply = function(item){
  * 将矩阵转化成transform字符串
  * @returns {string}
  */
-Matrix4.prototype.toTransformString = function(){
+Matrix4.prototype.toTransformString = function()
+{
     var matrix = this.matrix;
     var str = "matrix3d("+matrix[0]+","+matrix[4]+", "+matrix[8]+","+matrix[12]+", " +
         matrix[1]+","+matrix[5]+", "+matrix[9]+","+matrix[13]+", " +
@@ -485,7 +543,8 @@ Matrix4.prototype.toTransformString = function(){
     return str;
 }
 
-Matrix4.prototype.toTransformOption = function(){
+Matrix4.prototype.toTransformOption = function()
+{
     var that = this;
     return {
         matrix3d:that.toTransformString()
@@ -496,14 +555,16 @@ Matrix4.prototype.toTransformOption = function(){
  * 向量
  */
 
-function Vector3(x,y,z){
+function Vector3(x,y,z)
+{
     this.x = x;
     this.y = y;
     this.z = z;
     this.length = Math.sqrt((x*x+y*y+z*z));
 }
 
-Vector3.prototype.normalize = function(){
+Vector3.prototype.normalize = function()
+{
     this.x = this.x/this.length;
     this.y = this.y/this.length;
     this.z = this.z/this.length;
@@ -517,26 +578,36 @@ Vector3.prototype.normalize = function(){
  * @param dom
  * @returns {*}
  */
-function getDOMElementTransformMatrix(dom){
-    let transform = dom.css('transform');
+function getDOMElementTransformMatrix(dom)
+{
+    let transform = dom.css('transform');   //获得的结果形式是：matrix(1, 0, 0, 1, 0, 100)
     let leftParent = transform.indexOf('(');
     let rightParent = transform.indexOf(')');
-    if(leftParent == -1 || rightParent == -1){
+    if(leftParent == -1 || rightParent == -1) //说明没有transform属性，即dom元素没有经过各类变换位移
+    {
         return [];
     }
-    var matrixData = transform.substring(leftParent+1,rightParent);
-    var matrix = matrixData.split(",");
-    matrix.forEach(function(v,i){
+    var matrixData = transform.substring(leftParent+1,rightParent); //形式是：1，0，0，1，0，100
+    var matrix = matrixData.split(","); //是个数组[1, 0, 0, 1, 0, 100]  带有空格
+
+    //array.forEach(myFunc)，myFunc是一个函数，如 function myFunc(item, index){}
+    matrix.forEach(function(v,i){               
         v = v.toString().replace(" ","");
-        matrix[i] = +v;
+        matrix[i] = +v; //这里的 “=+”，其实“+”号表示将其他类型的值转成数字类型，即将“v”转成整形，然后赋值给matrix[i]
     });
-    if(matrix.length == 6){   //三维矩阵
+
+    if(matrix.length == 6)  //长度为6说明是二维变换，矩阵是3*3的
+    {  
+         //三维矩阵
         return [
             matrix[0],matrix[2],matrix[4],
             matrix[1],matrix[3],matrix[5],
             0,0,1
         ];
-    }else{             //四维矩阵
+    }
+    else //否则是三维变换，矩阵是4*4
+    {             
+        //四维矩阵
         return [
             matrix[0],matrix[4],matrix[8],matrix[12],
             matrix[1],matrix[5],matrix[9],matrix[13],
@@ -544,7 +615,6 @@ function getDOMElementTransformMatrix(dom){
             matrix[3],matrix[7],matrix[11],matrix[15]
         ];
     }
-
 }
 
 /**
@@ -552,7 +622,8 @@ function getDOMElementTransformMatrix(dom){
  * @param dom
  * @param option
  */
-function setTransform(dom,option){
+function setTransform(dom,option)
+{
     var transformString = "";
     option.matrix ? transformString+= option.matrix+" ":null;
     option.matrix3d ? transformString+= option.matrix3d+" ":null;
