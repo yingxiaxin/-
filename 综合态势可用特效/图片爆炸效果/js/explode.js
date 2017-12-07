@@ -22,18 +22,21 @@ $(document).ready(function() {
 
         var y = 0;
 
-        for (var z = 0; z <= (amount * width); z = z + width) {
+        for (var z = 0; z <= (amount * width); z = z + width) 
+        {
 
             $('<div class="clipped" style="clip: rect(' + y + 'px, ' + (z + width) + 'px, ' + (y + height) + 'px, ' + z + 'px)">' + html + '</div>').appendTo($t);
 
-            if (z === (amount * width) - width) {
+            if (z === (amount * width) - width) 
+            {
 
                 y = y + height;
                 z = -width;
 
             }
 
-            if (y === (amount * height)) {
+            if (y === (amount * height)) 
+            {
                 z = 9999999;
             }
 
