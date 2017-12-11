@@ -32,7 +32,6 @@
 
 <body>
 
-    <!-- HTML代码片段中请勿添加<body>标签 //-->
     <div id="container">
         <div class="clipped-box">
 
@@ -44,8 +43,16 @@
         </div>
     </div>
 
+    
+
     <script src="js/jquery.js"></script>
-    <script src="js/explode.js"></script>
+    <!-- <script src="js/explode.js"></script> -->
+    <script src="js/Explode_es6.js"></script>
+
+    <script>
+        let dom = document.getElementsByClassName('clipped-box')[0];
+        Explode.getClips(dom, 5);
+    </script>
 </body>
 
 </html>
